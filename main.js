@@ -1,5 +1,4 @@
-const list = {
-}
+const list = {};
 function changeStatus(task,status){
     list[task] = status;
 }
@@ -10,23 +9,20 @@ function deleteTask(task){
     delete list[task];
 }
 function showList(){
-    let createTodo ="";
-    let createInProgress ="";
-    let createDone="";
+    let createTodo ="",
+        createInProgress ="",
+        createDone="";
     for (let key in list){
         switch (list[key]){
-            case "To Do" : (createTodo === "") ? (createTodo+=(`\"${key}\"`)) : (createTodo+=(`,\n\"${key}\"`));
+            case "To Do" : createTodo += (createTodo === "") ? `\"${key}\"` : `,\n\"${key}\"`;
             break;
-            case "In Progress" : (createInProgress === "") ? (createInProgress+=(`\"${key}\"`)) : (createInProgress+=(`,\n\"${key}\"`));
+            case "In Progress" : createInProgress += (createInProgress === "") ? `\"${key}\"` : `,\n\"${key}\"`;
             break;
-            case "Done" : (createDone === "") ? (createDone+=(`\"${key}\"`)) : (createDone+=(`,\n\"${key}\"`));
+            case "Done" : createDone += (createDone === "") ? `\"${key}\"` : `,\n\"${key}\"`;
             break;
         }
     }
-    if (createTodo === "") createTodo = "-\n";
-    if (createInProgress === "") createInProgress = "-\n";
-    if (createDone ==="") createDone = "-\n"
-    console.log(`Todo:\n${createTodo}\nIn Progress:\n${createInProgress}\nDone:\n${createDone}`)
+    console.log(`Todo:\n${createTodo||`-`}\nIn Progress:\n${createInProgress||`-`}\nDone:\n${createDone||`-`}`)
 }
 addTask("Wake up");
 addTask("Have breakfast");
@@ -35,5 +31,4 @@ addTask("Make money");
 addTask("Learn Javascript");
 changeStatus("Wake up","Done");
 changeStatus("have breakfast","Done");
-changeStatus("Go to work","In Progress");
 showList();
